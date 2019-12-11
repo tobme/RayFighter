@@ -1,0 +1,41 @@
+<br /><br /><br />--------- Stuff to think about --------<br />git config commands:<br />
+lg:  
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"  
+slog:  
+git config --global alias.slog "log --pretty=oneline --abbrev-commit"   
+
+
+<br />l2include:  
+//=================================  <br />
+// include guard  
+#ifndef __MYCLASS_H_INCLUDED__  
+#define __MYCLASS_H_INCLUDED__  
+
+//=================================  
+// forward declared dependencies  
+class Foo;  
+class Bar;  
+
+//=================================  
+// included dependencies  
+#include <vector>  
+#include "parent.h"  
+#include "object.h"  
+
+//=================================  
+// the actual class  
+class MyClass : public Parent  // Parent object, so #include "parent.h"  
+{  
+public:  
+  std::vector<int> avector;    // vector object, so #include <vector>  
+  Foo* foo;                    // Foo pointer, so forward declare Foo  
+  void Func(Bar& bar);         // Bar reference, so forward declare Bar  
+
+  Object ove;                  // Created instance/object of Object,  
+                               // so #include "object.h"  
+
+  friend class MyFriend;       // friend declaration is not a dependency  
+                               //   don't do anything about MyFriend ;(  
+};  
+
+#endif // __MYCLASS_H_INCLUDED__   
